@@ -80,19 +80,19 @@ const FloatingLanguage = ({ name, x, y, delay }: { name: string, x: string, y: s
 const skills = [
   { 
     name: 'Programming Languages', 
-    items: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C++', 'Kotlin', 'Swift', 'Go', 'Rust', 'PHP'] 
+    items: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C++', 'Kotlin', 'PHP'] 
   },
   { 
     name: 'Web Dev', 
-    items: ['React', 'Next.js', 'Vue.js', 'Angular', 'Node.js', 'Express.js', 'Django', 'Flask', 'HTML5', 'CSS3', 'Tailwind CSS', 'MongoDB', 'PostgreSQL', 'GraphQL'] 
+    items: ['React', 'Next.js', 'Vue.js', 'Node.js', 'Express.js', 'Flask', 'HTML5', 'CSS3', 'Tailwind CSS', 'MongoDB', 'PostgreSQL'] 
   },
   { 
     name: 'Mobile Dev', 
-    items: ['React Native', 'Flutter', 'Android (Kotlin)', 'iOS (Swift)', 'Expo', 'Ionic', 'Firebase', 'App Store Connect', 'Google Play Console', 'Mobile UI/UX'] 
+    items: ['React Native', 'Kotlin', 'Expo', 'Firebase', 'Mobile UI/UX','Android Studio'] 
   },
   { 
     name: 'AI & ML', 
-    items: ['TensorFlow', 'PyTorch', 'Scikit-learn', 'Hugging Face', 'LangChain', 'OpenAI API', 'Computer Vision', 'NLP', 'Data Analysis', 'Neural Networks'] 
+    items: [ 'PyTorch', 'Scikit-learn', 'Hugging Face', 'LangChain', 'Computer Vision', 'NLP', 'Data Analysis'] 
   },
 ];
 
@@ -167,20 +167,30 @@ export default function Home() {
         opacity: [0.15, 0.25, 0.15],
       };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Hardcoded request - log to console
-    console.log('Form submission:', {
-      timestamp: new Date().toISOString(),
-      data: formData,
-      status: 'success'
-    });
-
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
-    setFormData({ name: '', email: '', message: '' });
-  };
+      const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+      
+        try {
+          const res = await fetch('/api/sendMail', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+      
+          if (res.ok) {
+            setIsSubmitted(true);
+            setTimeout(() => setIsSubmitted(false), 3000);
+            setFormData({ name: '', email: '', message: '' });
+          } else {
+            console.error('Error sending message');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+      
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
@@ -328,11 +338,14 @@ export default function Home() {
                     We, <strong>Abhinav Singh</strong> and <strong>Swadesh Patel</strong>, are two passionate developers, both 21 years old, building innovative digital solutions together. Our journey started with a shared belief: technology should be accessible, impactful, and meaningful for everyone.
                   </p>
 
+                  <p className="text-muted-foreground leading-relaxed pt-2">
+                    By combining our skills and vision, we deliver high-quality digital products that push boundaries and add real value.
+                  </p>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="flex flex-col items-center space-y-3 p-4 rounded-lg bg-muted/30">
                       <h3 className="font-medium">Abhinav Singh</h3>
                       <a
-                        href="https://www.linkedin.com/in/abhinav-singh-profile"
+                        href="https://www.linkedin.com/in/singhabhinav04/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-sm px-3 py-1 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
@@ -345,7 +358,7 @@ export default function Home() {
                     <div className="flex flex-col items-center space-y-3 p-4 rounded-lg bg-muted/30">
                       <h3 className="font-medium">Swadesh Patel</h3>
                       <a
-                        href="https://www.linkedin.com/in/swadesh-patel-profile"
+                        href="https://www.linkedin.com/in/swadeshpatel/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-sm px-3 py-1 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
@@ -355,10 +368,6 @@ export default function Home() {
                       </a>
                     </div>
                   </div>
-
-                  <p className="text-muted-foreground leading-relaxed pt-2">
-                    By combining our skills and vision, we deliver high-quality digital products that push boundaries and add real value.
-                  </p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -599,12 +608,9 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <Mail className="h-5 w-5 text-primary" />
-                  <span>Devverse@gmail.com</span>
+                  <span>devbitnest@gmail.com</span>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <Phone className="h-5 w-5 text-primary" />
-                  <span>+91 8146956336</span>
-                </div>
+ 
                 <div className="flex items-center space-x-3">
                   <MapPin className="h-5 w-5 text-primary" />
                   <span>Chandigarh, India</span>
@@ -672,7 +678,7 @@ export default function Home() {
       <footer className="py-8 px-4 sm:px-6 lg:px-8 border-t border-border">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-muted-foreground">
-            © 2025 DevVerse. Built with Next.js, TypeScript, and Tailwind CSS.
+            © 2025 BitNest.
           </p>
         </div>
       </footer>

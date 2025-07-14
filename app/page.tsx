@@ -78,21 +78,21 @@ const FloatingLanguage = ({ name, x, y, delay }: { name: string, x: string, y: s
 );
 
 const skills = [
-  { 
-    name: 'Programming Languages', 
-    items: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C++', 'Kotlin', 'PHP'] 
+  {
+    name: 'Programming Languages',
+    items: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C++', 'Kotlin', 'PHP']
   },
-  { 
-    name: 'Web Dev', 
-    items: ['React', 'Next.js', 'Vue.js', 'Node.js', 'Express.js', 'Flask', 'HTML5', 'CSS3', 'Tailwind CSS', 'MongoDB', 'PostgreSQL'] 
+  {
+    name: 'Web Dev',
+    items: ['React', 'Next.js', 'Vue.js', 'Node.js', 'Express.js', 'Flask', 'HTML5', 'CSS3', 'Tailwind CSS', 'MongoDB', 'PostgreSQL']
   },
-  { 
-    name: 'Mobile Dev', 
-    items: ['React Native', 'Kotlin', 'Expo', 'Firebase', 'Mobile UI/UX','Android Studio'] 
+  {
+    name: 'Mobile Dev',
+    items: ['React Native', 'Kotlin', 'Expo', 'Firebase', 'Mobile UI/UX', 'Android Studio']
   },
-  { 
-    name: 'AI & ML', 
-    items: [ 'PyTorch', 'Scikit-learn', 'Hugging Face', 'LangChain', 'Computer Vision', 'NLP', 'Data Analysis'] 
+  {
+    name: 'AI & ML',
+    items: ['PyTorch', 'Scikit-learn', 'Hugging Face', 'LangChain', 'Computer Vision', 'NLP', 'Data Analysis']
   },
 ];
 
@@ -141,56 +141,56 @@ export default function Home() {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     // Initial check
     checkMobile();
-    
+
     // Add event listener for window resize
     window.addEventListener('resize', checkMobile);
-    
+
     // Cleanup
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   // Animation variants that respect reduced motion preferences
-  const orb1Animation = prefersReducedMotion 
-    ? { opacity: 0.2 } 
+  const orb1Animation = prefersReducedMotion
+    ? { opacity: 0.2 }
     : {
-        scale: [1, 1.1, 1],
-        opacity: [0.2, 0.3, 0.2],
-      };
+      scale: [1, 1.1, 1],
+      opacity: [0.2, 0.3, 0.2],
+    };
 
-  const orb2Animation = prefersReducedMotion 
-    ? { opacity: 0.15 } 
+  const orb2Animation = prefersReducedMotion
+    ? { opacity: 0.15 }
     : {
-        scale: [1.1, 1, 1.1],
-        opacity: [0.15, 0.25, 0.15],
-      };
+      scale: [1.1, 1, 1.1],
+      opacity: [0.15, 0.25, 0.15],
+    };
 
-      const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-      
-        try {
-          const res = await fetch('/api/sendMail', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-          });
-      
-          if (res.ok) {
-            setIsSubmitted(true);
-            setTimeout(() => setIsSubmitted(false), 3000);
-            setFormData({ name: '', email: '', message: '' });
-          } else {
-            console.error('Error sending message');
-          }
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      };
-      
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch('/api/sendMail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setIsSubmitted(true);
+        setTimeout(() => setIsSubmitted(false), 3000);
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        console.error('Error sending message');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
@@ -327,7 +327,7 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <Card className="group hover:shadow-lg transition-all duration-300 bg-gradient-to-br from-card via-card to-muted/20 dark:from-card dark:via-card dark:to-primary/5 border border-border/50 dark:border-border/30 shadow-lg dark:shadow-primary/10 hover:shadow-xl dark:hover:shadow-primary/20 hover:border-primary/30 dark:hover:border-primary/50 overflow-hidden">
+              <Card className="group transition-all duration-300 bg-gradient-to-br from-card via-card to-muted/20 dark:from-card dark:via-card dark:to-primary/5 border border-border/50 dark:border-border/30 shadow-lg dark:shadow-primary/10 hover:shadow-xl dark:hover:shadow-primary/20 hover:border-primary/30 dark:hover:border-primary/50 overflow-hidden">
                 <CardHeader className="relative">
                   <CardTitle className="text-2xl flex items-center gap-2">
                     <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">Our Story</span>
@@ -382,7 +382,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="space-y-6"
             >
-              <Card className="group hover:shadow-lg transition-all duration-300 bg-gradient-to-br from-card via-card to-muted/20 dark:from-card dark:via-card dark:to-primary/5 border border-border/50 dark:border-border/30 shadow-lg dark:shadow-primary/10 hover:shadow-xl dark:hover:shadow-primary/20 hover:border-primary/30 dark:hover:border-primary/50">
+              <Card className="group transition-all duration-300 bg-gradient-to-br from-card via-card to-muted/20 dark:from-card dark:via-card dark:to-primary/5 border border-border/50 dark:border-border/30 shadow-lg dark:shadow-primary/10 hover:shadow-xl dark:hover:shadow-primary/20 hover:border-primary/30 dark:hover:border-primary/50">
                 <CardHeader>
                   <CardTitle className="text-xl">Our Mission</CardTitle>
                 </CardHeader>
@@ -393,7 +393,7 @@ export default function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="group hover:shadow-lg transition-all duration-300 bg-gradient-to-br from-card via-card to-muted/20 dark:from-card dark:via-card dark:to-primary/5 border border-border/50 dark:border-border/30 shadow-lg dark:shadow-primary/10 hover:shadow-xl dark:hover:shadow-primary/20 hover:border-primary/30 dark:hover:border-primary/50">
+              <Card className="group transition-all duration-300 bg-gradient-to-br from-card via-card to-muted/20 dark:from-card dark:via-card dark:to-primary/5 border border-border/50 dark:border-border/30 shadow-lg dark:shadow-primary/10 hover:shadow-xl dark:hover:shadow-primary/20 hover:border-primary/30 dark:hover:border-primary/50">
                 <CardHeader>
                   <CardTitle className="text-xl">Our Values</CardTitle>
                 </CardHeader>
@@ -453,11 +453,10 @@ export default function Home() {
                         setActiveSkillTab(category.name);
                         scrollSkillsIntoView();
                       }}
-                      className={`px-3 py-2 rounded-3xl m-1 text-sm sm:text-base font-medium transition-all duration-300 flex items-center gap-2 whitespace-nowrap ${
-                        activeSkillTab === category.name
+                      className={`px-3 py-2 rounded-3xl m-1 text-sm sm:text-base font-medium transition-all duration-300 flex items-center gap-2 whitespace-nowrap ${activeSkillTab === category.name
                           ? 'bg-primary text-primary-foreground shadow-md scale-105'
                           : 'bg-card hover:bg-muted text-muted-foreground hover:text-foreground border border-border/50'
-                      }`}
+                        }`}
                       whileHover={{ scale: activeSkillTab === category.name ? 1.05 : 1.03 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -483,7 +482,7 @@ export default function Home() {
                 </h3>
                 <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent mb-6"></div>
               </div>
-              
+
               <div className="flex flex-wrap gap-2 md:gap-3 justify-center">
                 {skills.find(category => category.name === activeSkillTab)?.items.map((skill, index) => (
                   <motion.div
@@ -530,7 +529,7 @@ export default function Home() {
           >
             {projects.map((project, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-2 relative bg-gradient-to-br from-card via-card to-muted/20 dark:from-card dark:via-card dark:to-primary/5 border border-border/50 dark:border-border/30 shadow-lg dark:shadow-primary/10 hover:shadow-xl dark:hover:shadow-primary/20 hover:border-primary/30 dark:hover:border-primary/50">
+                <Card className="group overflow-hidden transition-all duration-300 hover:-translate-y-2 relative bg-gradient-to-br from-card via-card to-muted/20 dark:from-card dark:via-card dark:to-primary/5 border border-border/50 dark:border-border/30 shadow-lg dark:shadow-primary/10 hover:shadow-xl dark:hover:shadow-primary/20 hover:border-primary/30 dark:hover:border-primary/50">
                   {/* Glowing background effect */}
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent via-primary/5 to-primary/10 dark:from-transparent dark:via-primary/10 dark:to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
@@ -610,7 +609,7 @@ export default function Home() {
                   <Mail className="h-5 w-5 text-primary" />
                   <span>devbitnest@gmail.com</span>
                 </div>
- 
+
                 <div className="flex items-center space-x-3">
                   <MapPin className="h-5 w-5 text-primary" />
                   <span>Chandigarh, India</span>

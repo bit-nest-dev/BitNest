@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/sendMail/route.ts": {
+      "maxDuration": 10
+    }
+  }
+}

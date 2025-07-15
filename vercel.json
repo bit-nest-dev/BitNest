@@ -1,14 +1,7 @@
 {
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
   "functions": {
-    "app/api/send/route.ts": {
-      "maxDuration": 30
+    "app/api/sendMail/route.ts": {
+      "maxDuration": 10
     }
-  },
-  "buildCommand": "next build"
+  }
 }

@@ -3,28 +3,63 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-export async function POST(req: NextRequest) {
-  try {
-    const { name, email, message } = await req.json();
 
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
+
+export async function POST(req :NextRequest){
+
+console.log("Req recieved")
+const { name, email, message } = await req.json() ;
+
+const transporter = nodemailer.createTransport({
+    port: 587,
+    host: "smtp.gmail.com",
+    auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
-      },
-    });
+    },
+    secure: false, // Use false for port 587 (STARTTLS)
+    tls: {
+        rejectUnauthorized: false // Allow self-signed certificates
+    }
+});
 
-    await transporter.sendMail({
-      from: `"${name}" <${email}>`,
-      to: process.env.EMAIL_USER, // you can send to yourself
-      subject: 'New Contact Form Message',
-      text: `Name: ${name}\nEmail: ${email}\nMessage:\n${message}`,
+await new Promise((resolve, reject) => {
+    // verify connection configuration
+    transporter.verify(function (error, success) {
+        if (error) {
+            console.log(error);
+            reject(error);
+        } else {
+            console.log("Server is ready to take our messages");
+            resolve(success);
+        }
     });
+});
 
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error('Error sending email:', error);
-    return NextResponse.json({ success: false }, { status: 500 });
-  }
-}
+const mailData = {
+    from: {
+        name: `${name}`,
+        address: `${email}`,
+    },
+    replyTo: 'devbitnest@gmail.com',
+    to: "devbitnest@gmail.com",
+    subject: `form message`,
+    text: message,
+    html: `${message}`,
+};
+
+await new Promise((resolve, reject) => {
+    // send mail
+    transporter.sendMail(mailData, (err, info) => {
+        if (err) {
+            console.error(err);
+            reject(err);
+        } else {
+            console.log(info);
+            resolve(info);
+        }
+    });
+});
+  console.log("sucess")
+    return NextResponse.json({ success: true }, { status: 200 });
+};

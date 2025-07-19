@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Github, ExternalLink, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowRight, Github, ExternalLink, Mail, MapPin, Phone, Sparkles, Code, Rocket, Users } from 'lucide-react';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -80,18 +80,22 @@ const FloatingLanguage = ({ name, x, y, delay }: { name: string, x: string, y: s
 const skills = [
   {
     name: 'Programming Languages',
+    icon: <Code className="w-4 h-4" />
     items: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C++', 'Kotlin', 'PHP']
   },
   {
     name: 'Web Dev',
+    icon: <Sparkles className="w-4 h-4" />,
     items: ['React', 'Next.js', 'Vue.js', 'Node.js', 'Express.js', 'Flask', 'HTML5', 'CSS3', 'Tailwind CSS', 'MongoDB', 'PostgreSQL']
   },
   {
     name: 'Mobile Dev',
+    icon: <Rocket className="w-4 h-4" />,
     items: ['React Native', 'Kotlin', 'Expo', 'Firebase', 'Mobile UI/UX', 'Android Studio']
   },
   {
     name: 'AI & ML',
+    icon: <Users className="w-4 h-4" />,
     items: ['PyTorch', 'Scikit-learn', 'Hugging Face', 'LangChain', 'Computer Vision', 'NLP', 'Data Analysis']
   },
 ];
@@ -134,6 +138,7 @@ export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const [activeSkillTab, setActiveSkillTab] = useState('Programming Languages');
+  const [activeSkillIcon, setActiveSkillIcon] = useState(<Code className="w-4 h-4" />);
   const skillsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -451,6 +456,7 @@ export default function Home() {
                       key={category.name}
                       onClick={() => {
                         setActiveSkillTab(category.name);
+                        setActieSkillIcon(category.icon);
                         scrollSkillsIntoView();
                       }}
                       className={`px-3 py-2 rounded-3xl m-1 text-sm sm:text-base font-medium transition-all duration-300 flex items-center gap-2 whitespace-nowrap ${activeSkillTab === category.name
@@ -460,7 +466,7 @@ export default function Home() {
                       whileHover={{ scale: activeSkillTab === category.name ? 1.05 : 1.03 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <span>{category.name}</span>
+                      <span>{category.icon} {category.name}</span>
                     </motion.button>
                   ))}
                 </div>
@@ -478,7 +484,7 @@ export default function Home() {
             >
               <div className="mb-4">
                 <h3 className="text-xl font-semibold text-center mb-6 flex items-center justify-center gap-2">
-                  <span>{activeSkillTab}</span>
+                  <span>{activeSkillIcon} {activeSkillTab}</span>
                 </h3>
                 <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent mb-6"></div>
               </div>

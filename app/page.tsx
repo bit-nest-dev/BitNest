@@ -80,7 +80,7 @@ const FloatingLanguage = ({ name, x, y, delay }: { name: string, x: string, y: s
 const skills = [
   {
     name: 'Programming Languages',
-    icon: <Code className="w-4 h-4" />
+    icon: <Code className="w-4 h-4" />,
     items: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C++', 'Kotlin', 'PHP']
   },
   {
@@ -456,7 +456,7 @@ export default function Home() {
                       key={category.name}
                       onClick={() => {
                         setActiveSkillTab(category.name);
-                        setActieSkillIcon(category.icon);
+                        setActiveSkillIcon(category.icon);
                         scrollSkillsIntoView();
                       }}
                       className={`px-3 py-2 rounded-3xl m-1 text-sm sm:text-base font-medium transition-all duration-300 flex items-center gap-2 whitespace-nowrap ${activeSkillTab === category.name
@@ -466,7 +466,8 @@ export default function Home() {
                       whileHover={{ scale: activeSkillTab === category.name ? 1.05 : 1.03 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <span>{category.icon} {category.name}</span>
+                      {category.icon}
+                      <span>{category.name}</span>
                     </motion.button>
                   ))}
                 </div>
@@ -484,7 +485,8 @@ export default function Home() {
             >
               <div className="mb-4">
                 <h3 className="text-xl font-semibold text-center mb-6 flex items-center justify-center gap-2">
-                  <span>{activeSkillIcon} {activeSkillTab}</span>
+                  {activeSkillIcon}
+                  <span>{activeSkillTab}</span>
                 </h3>
                 <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent mb-6"></div>
               </div>
